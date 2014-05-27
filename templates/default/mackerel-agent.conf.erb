@@ -7,7 +7,7 @@ roles = <%= node['mackerel-agent']['roles'].to_s %>
 
 <% if node['mackerel-agent']['user-metrics'] %>
 <% node['mackerel-agent']['user-metrics'].each do |metrics| %>
-[sensu.checks.<%= metrics.name %>]
+[plugin.metrics.<%= metrics.name %>]
 command = "<%= metrics.command %>"
 type = "metric"
 <% end %>
