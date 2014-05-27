@@ -8,7 +8,7 @@
 #
 
 gpgkey = 'https://mackerel.io/assets/files/GPG-KEY-mackerel'
-if platform?('centos') or platform?('redhat')
+if platform?('centos') or platform?('redhat') or platform?('amazon')
   include_recipe 'yum'
   yum_repository "mackerel" do
     description "mackerel-agent monitoring"
@@ -36,6 +36,7 @@ template "/etc/mackerel-agent/mackerel-agent.conf" do
   owner "root"
   group "root"
   mode 0644
+  notifies :restart, 'service[mackerel-agent]'
 end
 
 service 'mackerel-agent' do
